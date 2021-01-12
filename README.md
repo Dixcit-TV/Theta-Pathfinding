@@ -76,9 +76,15 @@ Also it is worth noting that a slightly altered version of Theta* exists call La
 ## Resources
 
 [A* Search Algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm)
+
 [Any-Angle path planning](https://en.wikipedia.org/wiki/Any-angle_path_planning)
+
 [Theta* Search Algorithm](https://en.wikipedia.org/wiki/Theta*)
-[Bresenham's line algorithm](Bresenham's line algorithm)
+
+[Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)
+
 [Supercover line algorithm](http://eugen.dedu.free.fr/projects/bresenham/)
+
 [Theta*: Any-Angle Path Planning on Grids - Nash, Koening, Daniel, Felner](http://idm-lab.org/bib/abstracts/papers/aaai07a.pdf)
+
 [Lazy Theta* - Nash, Koening, Tovey](http://idm-lab.org/bib/abstracts/papers/aaai10b.pdf)
