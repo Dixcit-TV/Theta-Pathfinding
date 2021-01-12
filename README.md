@@ -22,3 +22,12 @@ In order to determine if a line of sight exists between two nodes we need to che
 
 This algorithm draws a straight line by moving 1 unit (or grid cell) in one axis (x axis if x2 - x1 > y2 - y1, y otherwise) and uses the slope error accumulated through each step to determine if a similar jump in another axis is required. The process is repeated until the destination is reached and allow us to only check the node as close as possible to the line. In the case of Theta*, we can check if each step jump leads to an obstruicted grid node, if it does the line expansion can be stoped and the line of sight is determined invalid.
 
+![Wikipedia - Bresenham's line algorithm](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/Bresenham's%20line%20algorithm%20-%20Wikipedia.png)
+
+One last consideration I needed to take into account is that Bresenham's line algorithm gives an approximation and some cells may be "missed" when a jumping in both x and y axis (i.e. only (x+1, y+1) will be checked and not (x+1, y) or (x, y+1)), [Bresenham-based supercover line algorithm](http://eugen.dedu.free.fr/projects/bresenham/) takes care of these cases by remembering the error amount of the previous step and uses it to decide if neighbor cells need to be checked.
+
+Theta* path using Bresenham, we can see some invalid corners (crossing blue tiles) are still counted as valid.
+![Theta* with Bresenham](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/Bresenham.png) 
+
+Theta* path using Bresenham - Supercover, the path doesn't intersect with any walls (blue tiles) anymore.
+![Theta* with Bresenham - Supercover](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/Bresenham_Supercover.png)
