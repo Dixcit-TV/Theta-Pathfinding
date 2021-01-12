@@ -17,7 +17,7 @@ Pathfinding or pathing, in computer applications, represents to attempt at plott
 
 An alternative to the highly used [A*](https://en.wikipedia.org/wiki/A*_search_algorithm) that I researched is called [Theta*](https://en.wikipedia.org/wiki/Theta*). Theta* is an **any-angle pathing algorithm** which based on A* and can find a near-optimal path (generally shorter) in similar execution time. The core of the algorithm is highly similar to A* but when A* is restricted to the grid directions (connections), the Theta* will add an extra processing step in order to trace straight path in any direction between two nodes as long as a line of sight exists between them. For example, if a line of sight exist between the current node neighbor and its parent, this node ignored and the direct path from parent to neighbor will be prefered. By doing so, the path is smoothed while searching.
 
-The following comparison is done using a **25x25 grid**, the distance represent to sum of the **euclidean distance** between each node of the resulting path and the time is the average of **100 iterations** of the visible path. Time and distance can be seen on the bottom right of the images.
+The following comparison is done using a **25x25 grid**, the distance represent to sum of the **euclidean distance** between each node of the resulting path and the timing is the average time of **100 iterations** of the visible path. Time and distance can be seen on the bottom right of the images.
 
 A* (blue) vs Theta* (Green)
 
