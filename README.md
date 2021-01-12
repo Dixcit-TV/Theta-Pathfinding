@@ -12,9 +12,18 @@ For this comparison both A* and the A* part of Theta* uses the same logic and da
 
 Pathfinding or pathing, in computer applications, represents to attempt at plotting an optimal path between 2 points from a graph. It is closely related to the shortest path problem. Pathfinding algorithms will use differents by starting at one vertex and increasingly expend its neighbors until the destination node is reached. It is important to note that although the focus of my research is based on a grid graph, to find a walkable path, pathfinding algorithm can be used in different problem solving situation such as decision making (calculating the best next moves in chess) or puzzle solving (find the least amount of move to complete a game of sudoku).
 
+
 ### Theta* - Any Angle pathfinding
 
-An alternative to the highly used [A*](https://en.wikipedia.org/wiki/A*_search_algorithm) that I researched is called [Theta*](https://en.wikipedia.org/wiki/Theta*). Theta* is an **any-angle pathing algorithm** which based on A* and can find a near-optimal path in similar execution time. The core of the algorithm is highly similar to A* but when A* is restricted to the grid directions (connections), the Theta* will add an extra processing step in order to trace straight path in any direction between two nodes as long as a line of sight exists between them. For example, if a line of sight exist between the current node neighbor and its parent, this node ignored and the direct path from parent to neighbor will be prefered. By doing so, the path is smoothed while searching.
+An alternative to the highly used [A*](https://en.wikipedia.org/wiki/A*_search_algorithm) that I researched is called [Theta*](https://en.wikipedia.org/wiki/Theta*). Theta* is an **any-angle pathing algorithm** which based on A* and can find a near-optimal path (generally shorter) in similar execution time. The core of the algorithm is highly similar to A* but when A* is restricted to the grid directions (connections), the Theta* will add an extra processing step in order to trace straight path in any direction between two nodes as long as a line of sight exists between them. For example, if a line of sight exist between the current node neighbor and its parent, this node ignored and the direct path from parent to neighbor will be prefered. By doing so, the path is smoothed while searching.
+
+The following comparison is done using a **25x25 grid**, the distance represent to sum of the **euclidean distance** between each node of the resulting path and the time is the average of **100 iterations** of the visible path. Time and distance can be seen on the bottom right of the images.
+
+A* (blue) vs Theta* (Green)
+
+![](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/AStarvsThetaStar.png)
+
+![](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/AStarvsThetaStar2.png)
 
 #### Line of Sight and Bresenham's line algorithm
 
@@ -31,3 +40,34 @@ Theta* path using Bresenham, we can see some invalid corners (crossing blue tile
 
 Theta* path using Bresenham - Supercover, the path doesn't intersect with any walls (blue tiles) anymore.
 ![Theta* with Bresenham - Supercover](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/Bresenham_Supercover.png)
+
+
+### What about A* with post processing path smoothing?
+
+While A* restricts the node expansions and path tracing to the grid axis which would result in a lot of unnatural 90º or 45º direction changes if we send an agent down the resulting path. The path can be subjected to a post processing path smoothing algorithm which will (in a same fashion as the Theta* preprocessing) look at all the nodes of the path and evaluate if a straight line is valid with any nodes further down the line and discard all the existing in-between steps. A* + path smoothing (PS) will result in a final path shorter than A* but, theoretically, Theta* will still have a shorter path as A* will still selects more nodes during pathing and only those nodes are used for smoothing.
+
+The following images shows the comparison between the final path of A* + PS and Theta* using the same setup as the previous A*, Theta* comparison. The smoothing algorithm is counted in the timing and is done using **Bresenham-based supercover line algorithm**.
+
+A*
+
+![](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/Astar.png)
+
+A* + SP
+
+![](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/AStar_Smoothed.png)
+
+A* + SP (blue) vs Theta* (Green)
+
+![](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/AStar_SmoothedvsThetaStar.png)
+![](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/AStar_SmoothedvsThetaStar2.png)
+
+
+## Conclusion
+
+More times than not, Theta* result in a smoother and shorter path than A* with a time difference close to neglectable. It should be noted that the difference in timing can vary greatly depending on the used Heuristic for those algorithms (comparisons were always made using the same Heuristic). Theta* indeed seemed to often offer more interesting results with a **Euclidean Distance Heuristic** with which it found a shorter path with a faster execution time.
+Reading other papers about similar comparison between A*, A* + PS and Theta* led me to the assumption that A* + SP would suffer from the run time of the post smoothing and bring Theta* closer to a win. In my case it wasn't so black and white although Theta* does provide significant benefits of a basic A* when a shorter or more natural path is required. On the other hand, Theta* might lose a great part of it when compared to A* with path smoothing. Two main cases araised: when many random obstacles are set, causing slaloming and detours, Theta* will try to find a shorter path around the majority of obstacles, while A* will run right through it. Smoothing such A* path will still result in many un-natural hard corners and be slightly longer. The second case is for more distinct path restriction, with less small obstacles scattered but more walls and corridors. Then more often than I expected Theta* and A* + PS resulted is a (close to) identical path, run time then would be the tie cutter.
+
+### Future work and reflection
+
+The tests and comparison performed here were quite restricted, although Theta* already showed some nice advantage over a basic A* when smooth path are wanted, A* + PS came to close the gap. For furture expansion of this research, I shall extend my test cases to include variation in grid size (very small, very large) and work with more wall aparition patterns and density. This would give more concrete results. 
+Also it is worth noting that a slightly altered version of Theta* exists call Lazy Theta* which tries to delay a much as possible the line of sight checks, reducing them in number (avoid line of sight checking for every considered nodes). It could be a new contender to add to the list here.
