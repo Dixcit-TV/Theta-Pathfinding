@@ -52,11 +52,11 @@ A*
 
 ![](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/Astar.png)
 
-A* + SP
+A* + PS
 
 ![](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/AStar_Smoothed.png)
 
-A* + SP (blue) vs Theta* (Green)
+A* + PS (blue) vs Theta* (Green)
 
 ![](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/AStar_SmoothedvsThetaStar.png)
 ![](https://github.com/Dixcit-TV/Theta-Pathfinding/blob/main/images/AStar_SmoothedvsThetaStar2.png)
