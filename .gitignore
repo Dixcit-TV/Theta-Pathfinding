@@ -30,3 +30,5 @@
 *.exe
 *.out
 *.app
+source/.vs/GPP_Framework/v16/.suo
+source/.vs/GPP_Framework/v16/Browse.VC.db
